@@ -1,0 +1,5 @@
+names:
+- dien_tro
+path: /kaggle/input/datasets/trongphucffdfdf/linhkien-dataset
+train: images/train
+val: images/val

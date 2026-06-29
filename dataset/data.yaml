@@ -1,0 +1,8 @@
+# Tự sinh bởi linhkien_tool / m0_core - không cần sửa tay.
+path: C:/tai_lieu_hoc/myproject/kiemSoatLinhKien/linhkien_tool/dataset
+train: images/train
+val: images/val
+nc: 2
+names:
+  - CAP
+  - RES

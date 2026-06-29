@@ -1,0 +1,8 @@
+# Nhan dien & dem linh kien dien tu (YOLOv8)
+# Cai het: pip install -r requirements.txt
+ultralytics>=8.0          # YOLOv8 (tu keo torch + torchvision)
+opencv-python>=4.8        # doc video/camera, ve box
+numpy>=1.24
+pillow>=10.0              # hien anh trong GUI (Tkinter)
+pyyaml>=6.0               # doc/ghi data.yaml
+kaggle>=1.6               # (tuy chon) train tren Kaggle GPU free

@@ -1,0 +1,29 @@
+# ===== BI MAT - TUYET DOI KHONG COMMIT =====
+cloud_kaggle/secrets.json
+**/secrets.json
+*.token
+
+# ===== Transient / build tam =====
+cloud_kaggle/_out/
+cloud_kaggle/_log/
+cloud_kaggle/upload/
+cloud_kaggle/_clean_view/
+cloud_kaggle/_train_view/
+cloud_kaggle/kernel-metadata.json
+_train_view/
+
+# ===== Model / pretrained tu tai lai =====
+models/train/
+yolov8n.pt
+yolo26n.pt
+*.onnx
+
+# ===== Cache / Python =====
+__pycache__/
+*.py[cod]
+dataset/labels/*.cache
+dataset/labels/**/*.cache
+
+# ===== OS =====
+.DS_Store
+Thumbs.db

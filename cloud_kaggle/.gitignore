@@ -1,0 +1,8 @@
+# Token Kaggle bi mat - khong commit
+secrets.json
+# Staging + log tam + ban sach build de train
+upload/
+_log/
+_clean_view/
+kernel-metadata.json
+_out/
