@@ -8,8 +8,7 @@ kèm bộ công cụ **gán nhãn bán tự động** + **train Kaggle GPU miễ
 ---
 
 ## 📑 Mục lục
-- [Cài đặt](#-cài-đặt)
-- [Chạy](#-chạy)
+- [Tải về & Chạy](#-tải-về--chạy)
 - [HƯỚNG DẪN SỬ DỤNG CHI TIẾT](#-hướng-dẫn-sử-dụng-chi-tiết)
 - [Train trên Kaggle GPU](#️-train-trên-kaggle-gpu-miễn-phí)
 - [Chạy bằng GPU (tăng FPS)](#-chạy-bằng-gpu-tăng-fps)
@@ -17,23 +16,23 @@ kèm bộ công cụ **gán nhãn bán tự động** + **train Kaggle GPU miễ
 
 ---
 
-## 🚀 Cài đặt
+## 🚀 Tải về & Chạy
 
-Cần **Python 3.9+**.
+**Cần cài sẵn [Python 3.9+](https://www.python.org/downloads/)** (lúc cài nhớ tick *"Add Python to PATH"*).
 
+### Cách 1 — Đơn giản nhất (Windows)
+1. Tải code: nút **Code → Download ZIP** trên GitHub → **giải nén**. (Hoặc `git clone https://github.com/phucttp/Electronic-Parts-Counter.git`)
+2. Vào thư mục → **nháy đôi `run.bat`**.
+   - Lần đầu nó **tự cài thư viện** (đợi vài phút) rồi **mở app**.
+   - Các lần sau: nháy đôi là chạy ngay.
+
+### Cách 2 — Bằng lệnh
 ```bash
 git clone https://github.com/phucttp/Electronic-Parts-Counter.git
 cd Electronic-Parts-Counter
-pip install -r requirements.txt
-```
-> Windows: có thể **nháy đôi `setup.bat`** để cài 1 phát.
-
-## ▶️ Chạy
-
-```bash
+pip install -r requirements.txt     # hoac nhay doi setup.bat
 python m4_gui/app.py
 ```
-> Hoặc **nháy đôi `run.bat`** (tự cài thư viện lần đầu rồi mở app).
 
 ---
 
@@ -59,7 +58,11 @@ python m4_gui/app.py
 ### Quy trình đầy đủ A → Z
 
 **Bước 1 — Chọn nguồn**
-Gõ vào ô **Nguồn**: `0` (webcam) hoặc đường dẫn video (vd `../test/vi3.mp4`).
+Gõ vào ô **Nguồn**:
+- **`0`** = **webcam** (dùng thật — gán nhãn & nhận diện trực tiếp trên camera). Nếu có nhiều cam, thử `1`, `2`...
+- Hoặc đường dẫn **video** (vd `../test/vi3.mp4`) — chỉ để test/demo khi chưa có camera.
+
+> Gán nhãn **trực tiếp trên camera** hoàn toàn được: camera chạy live, bấm **SPACE** để chộp khoảnh khắc muốn gán. (Phím tua `a/d` chỉ có với video.)
 
 **Bước 2 — (Khuyến nghị) Chọn vùng ROI**
 Bấm **Chọn vùng ROI** → cửa sổ hiện hình khay → **click trái** vài điểm quanh mép khay (≥3 điểm) → **Lưu**.
