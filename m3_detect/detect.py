@@ -65,7 +65,16 @@ def make_fitter():
     return fit
 
 
-def draw_overlay(frame, res, names, fps, conf, show_label, disabled=None):
+def get_device_tag():
+    """Trả về 'GPU' nếu torch thấy CUDA, ngược lại 'CPU'."""
+    try:
+        import torch
+        return "GPU" if torch.cuda.is_available() else "CPU"
+    except Exception:
+        return "CPU"
+
+
+def draw_overlay(frame, res, names, fps, conf, show_label, disabled=None, device="CPU"):
     """Ve box theo mau + bang chu thich nho o goc trai-tren.
     Bo qua cac loai trong `disabled` (xoa mem) - khong ve, khong dem."""
     disabled = disabled or set()
@@ -85,15 +94,16 @@ def draw_overlay(frame, res, names, fps, conf, show_label, disabled=None):
     present = sorted(counts.keys())
     rows = len(present)
     x, y = 10, 10
-    w, lh = 250, 24
+    w, lh = 290, 24
     h = lh * (rows + 1) + 12
     overlay = frame.copy()
     cv2.rectangle(overlay, (x, y), (x + w, y + h), (0, 0, 0), -1)
     cv2.addWeighted(overlay, 0.45, frame, 0.55, 0, frame)
 
     total = sum(counts.values())
-    cv2.putText(frame, f"FPS {fps:.0f} | conf {conf:.2f} | tong: {total}", (x + 10, y + 20),
-                FONT, 0.5, (255, 255, 255), 1, cv2.LINE_AA)
+    dev_col = (120, 255, 120) if device == "GPU" else (180, 180, 180)
+    cv2.putText(frame, f"FPS {fps:.0f} | {device} | conf {conf:.2f} | tong: {total}",
+                (x + 10, y + 20), FONT, 0.5, dev_col, 1, cv2.LINE_AA)
     for i, cid in enumerate(present):
         yy = y + 20 + (i + 1) * lh
         col = color_for(cid)
@@ -149,8 +159,11 @@ def main():
     model = load_model(args.model)
     if model is None:
         sys.exit(1)
+    device = get_device_tag()
     print(f"[i] Model: {args.model}")
     print(f"[i] Class: {model.names}")
+    print(f"[i] Thiết bị: {device}" + ("" if device == "GPU"
+          else " (cài torch CUDA để chạy GPU nhanh hơn - xem README)"))
 
     source, is_video = parse_source(args.source)
     if args.check:
@@ -184,7 +197,7 @@ def main():
         t0 = time.time()
         res = model(frame, imgsz=IMGSZ, conf=conf, verbose=False)[0]
         fps = 1.0 / max(time.time() - t0, 1e-6)
-        disp = draw_overlay(frame.copy(), res, model.names, fps, conf, show_label, disabled)
+        disp = draw_overlay(frame.copy(), res, model.names, fps, conf, show_label, disabled, device)
         cv2.imshow(win, disp)
 
         key = cv2.waitKey(delay) & 0xFF
